@@ -1,0 +1,7 @@
+# Ignorar archivo de configuración de base de datos con contraseñas
+**/database.properties
+
+# Carpetas temporales o generadas por NetBeans
+/build/
+/dist/
+/nbproject/private/
