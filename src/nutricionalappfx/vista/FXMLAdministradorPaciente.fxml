@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="550.0" minWidth="850.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutricionalappfx.vista.FXMLAdministradorPacienteController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="550.0" minWidth="850.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutricionalappfx.controlador.FXMLAdministradorPacienteController">
    <top>
       <HBox alignment="CENTER_LEFT" spacing="15.0" style="-fx-background-color: #f4f6f8; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0;" BorderPane.alignment="CENTER">
          <padding>
@@ -20,7 +20,7 @@
          </padding>
          <children>
             <Button mnemonicParsing="false" onAction="#handleBotonRegresar" text="← Regresar" />
-            <Label text="Administrador Pacientes">
+            <Label fx:id="lbTitulo" text="Administrador Pacientes">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -56,7 +56,7 @@
                   <TableColumn fx:id="colSexo" prefWidth="90.0" text="Sexo" />
                </columns>
                <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                  <TableView fx:constant = "CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
          </children>

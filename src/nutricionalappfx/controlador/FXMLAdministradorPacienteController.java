@@ -4,15 +4,24 @@
  */
 package nutricionalappfx.controlador;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import nutricionalappfx.NutricionalAppFX;
+import nutricionalappfx.dominio.pojo.Colaborador;
 
 /**
  * FXML Controller class
@@ -21,8 +30,12 @@ import javafx.scene.control.TextField;
  */
 public class FXMLAdministradorPacienteController implements Initializable {
 
+    private Colaborador colaborador;
+
     @FXML
     private TextField tfBuscar;
+    @FXML
+    private Label lbTitulo;
     @FXML
     private TableView<?> tvPacientes;
     @FXML
@@ -37,12 +50,6 @@ public class FXMLAdministradorPacienteController implements Initializable {
     private TableColumn<?, ?> colFechaNacimiento;
     @FXML
     private TableColumn<?, ?> colSexo;
-    @FXML
-    private Button btnCerrarSesion;
-    @FXML
-    private Button btnBuscar;
-    @FXML
-    private Button btnBaja;
 
     /**
      * Initializes the controller class.
@@ -50,10 +57,28 @@ public class FXMLAdministradorPacienteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+
+    public void inicializarInformacion(Colaborador colaborador) {
+        this.colaborador = colaborador;
+    }
 
     @FXML
     private void handleBotonAlta(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(NutricionalAppFX.class.getResource("vista/FXMLFormularioPaciente.fxml"));
+            Parent vista = loader.load();
+
+            Stage escenarioActual = (Stage) tvPacientes.getScene().getWindow();
+            Stage escenarioFormulario = new Stage();
+            escenarioFormulario.setScene(new Scene(vista));
+            escenarioFormulario.setTitle("Registrar Nuevo Paciente");
+            escenarioFormulario.initOwner(escenarioActual); // <-- Vincula la ventana padre
+            escenarioFormulario.initModality(Modality.APPLICATION_MODAL);
+            escenarioFormulario.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -66,10 +91,40 @@ public class FXMLAdministradorPacienteController implements Initializable {
 
     @FXML
     private void handleBotonRegresar(ActionEvent event) {
+        try {
+            Stage escenario = (Stage) lbTitulo.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(NutricionalAppFX.class.getResource("vista/FXMLPrincipal.fxml"));
+            Parent vista = loader.load();
+
+            FXMLPrincipalController controlador = loader.getController();
+            controlador.inicializarInformacion(colaborador);
+
+            Scene escena = new Scene(vista);
+            escenario.setScene(escena);
+            escenario.setTitle("Control Nutricional");
+            escenario.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void handleBotonBuscar(ActionEvent event) {
     }
-    
+
+    @FXML
+    private void handleCerrarSesion(ActionEvent event) {
+        try {
+            Stage escenario = (Stage) lbTitulo.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(NutricionalAppFX.class.getResource("vista/FXMLAutenticacion.fxml"));
+            Parent vista = loader.load();
+
+            Scene escena = new Scene(vista);
+            escenario.setScene(escena);
+            escenario.setTitle("Iniciar Sesión");
+            escenario.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -4,15 +4,22 @@
  */
 package nutricionalappfx.controlador;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
+import nutricionalappfx.NutricionalAppFX;
 
 /**
  * FXML Controller class
@@ -21,14 +28,6 @@ import javafx.scene.control.ToggleGroup;
  */
 public class FXMLFormularioPacienteController implements Initializable {
 
-    @FXML
-    private Button btnRegresar;
-    @FXML
-    private Button btnCerrarSesion;
-    @FXML
-    private Button btnGuardar;
-    @FXML
-    private Button btnCancelar;
     @FXML
     private TextField tfCodigoPaciente;
     @FXML
@@ -60,6 +59,37 @@ public class FXMLFormularioPacienteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+
+    @FXML
+    private void handleCerrarSesion(ActionEvent event) {
+        try {
+            Stage ventanaModal = (Stage) tfNombre.getScene().getWindow();
+            Stage stagePrincipal = (Stage) ventanaModal.getOwner();
+            ventanaModal.close();
+
+            if (stagePrincipal != null) {
+                FXMLLoader loader = new FXMLLoader(NutricionalAppFX.class.getResource("vista/FXMLAutenticacion.fxml"));
+                Parent vista = loader.load();
+                stagePrincipal.setScene(new Scene(vista));
+                stagePrincipal.setTitle("Iniciar Sesión");
+                stagePrincipal.show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleRegresar(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleGuardarPaciente(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleCancelar(ActionEvent event) {
+    }
     
 }

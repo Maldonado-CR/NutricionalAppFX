@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="650.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26" fx:controller="nutricionalappfx.controlador.FXMLPrincipalController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nutricionalappfx.controlador.FXMLPrincipalController">
    <children>
       <Label fx:id="lbNombre" layoutX="56.0" layoutY="50.0" text="Label">
          <font>
@@ -17,5 +19,26 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <HBox alignment="CENTER_LEFT" layoutX="29.0" layoutY="242.0" prefHeight="100.0" prefWidth="592.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleAdminColaboradores" text="Administrador de Colaboradores ">
+               <HBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handleAdminPacientes" text="Administrador de Pacientes">
+               <HBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Administrador de Citas">
+               <HBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <Button layoutX="168.0" layoutY="357.0" mnemonicParsing="false" text="Administrador de Dietas" />
+      <Button layoutX="410.0" layoutY="357.0" mnemonicParsing="false" text="Colsultas" />
    </children>
 </AnchorPane>

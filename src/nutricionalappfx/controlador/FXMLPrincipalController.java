@@ -4,11 +4,18 @@
  */
 package nutricionalappfx.controlador;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import nutricionalappfx.NutricionalAppFX;
 import nutricionalappfx.dominio.pojo.Colaborador;
 
 /**
@@ -27,19 +34,41 @@ public class FXMLPrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }   
-    
-    public void inicializarInformacion(Colaborador colaborador){
+    }
+
+    public void inicializarInformacion(Colaborador colaborador) {
         this.colaborador = colaborador;
         mostrarInfoPantalla();
     }
-    
-    private void mostrarInfoPantalla(){
-        if(colaborador != null){
-            lbNombre.setText("Bienvenido(a) "+ colaborador.toString());
-            lbRol.setText("Rol: "+ colaborador.getRol());
+
+    private void mostrarInfoPantalla() {
+        if (colaborador != null) {
+            lbNombre.setText("Bienvenido(a) " + colaborador.toString());
+            lbRol.setText("Rol: " + colaborador.getRol());
         }
     }
-    
-}
 
+    @FXML
+    private void handleAdminColaboradores(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleAdminPacientes(ActionEvent event) {
+        try {
+            Stage escenario = (Stage) lbNombre.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(NutricionalAppFX.class.getResource("vista/FXMLAdministradorPaciente.fxml"));
+            Parent vista = loader.load();
+
+            FXMLAdministradorPacienteController controlador = loader.getController();
+            controlador.inicializarInformacion(colaborador);
+
+            Scene escena = new Scene(vista);
+            escenario.setScene(escena);
+            escenario.setTitle("Administrador de Pacientes");
+            escenario.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
