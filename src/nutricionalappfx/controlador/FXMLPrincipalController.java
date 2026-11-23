@@ -26,6 +26,7 @@ import nutricionalappfx.dominio.pojo.Colaborador;
 public class FXMLPrincipalController implements Initializable {
     
     private Colaborador colaborador;
+    private int idNutriologo;
     @FXML
     private Label lbNombre;
     @FXML
@@ -35,10 +36,9 @@ public class FXMLPrincipalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
-    public void inicializarInformacion(Colaborador colaborador) {
-        this.colaborador = colaborador;
-        mostrarInfoPantalla();
+    
+    public void recibirInformacion(int idNutriologo){
+        this.idNutriologo = idNutriologo;
     }
 
     private void mostrarInfoPantalla() {
@@ -46,6 +46,10 @@ public class FXMLPrincipalController implements Initializable {
             lbNombre.setText("Bienvenido(a) " + colaborador.toString());
             lbRol.setText("Rol: " + colaborador.getRol());
         }
+    }
+
+    public void inicializarInformacion(Colaborador colaborador) {
+        this.colaborador = colaborador;
     }
 
     @FXML
@@ -60,7 +64,7 @@ public class FXMLPrincipalController implements Initializable {
             Parent vista = loader.load();
 
             FXMLAdministradorPacienteController controlador = loader.getController();
-            controlador.inicializarInformacion(colaborador);
+            controlador.recibirInformacion(colaborador.getIdColaborador());
 
             Scene escena = new Scene(vista);
             escenario.setScene(escena);

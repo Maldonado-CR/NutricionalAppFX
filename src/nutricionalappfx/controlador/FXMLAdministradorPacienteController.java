@@ -31,6 +31,7 @@ import nutricionalappfx.dominio.pojo.Colaborador;
 public class FXMLAdministradorPacienteController implements Initializable {
 
     private Colaborador colaborador;
+    private int idNutriologo;
 
     @FXML
     private TextField tfBuscar;
@@ -62,6 +63,10 @@ public class FXMLAdministradorPacienteController implements Initializable {
     public void inicializarInformacion(Colaborador colaborador) {
         this.colaborador = colaborador;
     }
+    
+    public void recibirInformacion(int idNutriologo){
+        this.idNutriologo = idNutriologo;
+    }
 
     @FXML
     private void handleBotonAlta(ActionEvent event) {
@@ -73,7 +78,7 @@ public class FXMLAdministradorPacienteController implements Initializable {
             Stage escenarioFormulario = new Stage();
             escenarioFormulario.setScene(new Scene(vista));
             escenarioFormulario.setTitle("Registrar Nuevo Paciente");
-            escenarioFormulario.initOwner(escenarioActual); // <-- Vincula la ventana padre
+            escenarioFormulario.initOwner(escenarioActual); 
             escenarioFormulario.initModality(Modality.APPLICATION_MODAL);
             escenarioFormulario.showAndWait();
         } catch (IOException e) {
@@ -97,7 +102,7 @@ public class FXMLAdministradorPacienteController implements Initializable {
             Parent vista = loader.load();
 
             FXMLPrincipalController controlador = loader.getController();
-            controlador.inicializarInformacion(colaborador);
+            controlador.recibirInformacion(colaborador.getIdColaborador());
 
             Scene escena = new Scene(vista);
             escenario.setScene(escena);
